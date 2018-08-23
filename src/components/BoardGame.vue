@@ -36,49 +36,63 @@ export default {
       let move1 = 1 + Math.floor(Math.random() * 6);
       this.movement1 += move1;
 
-      if (this.movement1 == 1) {
-        this.position1x = "0px";
+      if (this.movement1 <= 5) {
+        let x = this.movement1 * 50;
+        this.position1x = `${x}px`;
         this.position1y = "500px";
+      } 
+      else if (this.movement1 <= 10) {
+        let x = this.movement1 * 50 - (50 + (this.movement1 - 6) * 100);
+        this.position1x = `${x}px`;
+        this.position1y = "400px";
       }
-      if (this.movement1 == 2) {
-        this.position1x = "100px";
-        this.position1y = "500px";
+       else if (this.movement1 <= 15) {
+        let x = this.movement1 * 50 - 500;
+        this.position1x = `${x}px`;
+        this.position1y = "300px";
       }
-      if (this.movement1 == 3) {
-        this.position1x = "200px";
-        this.position1y = "500px";
+       else if (this.movement1 <= 20) {
+        let x = this.movement1 * 50 - (550 + (this.movement1 - 16) * 100);
+        this.position1x = `${x}px`;
+        this.position1y = "200px";
       }
-      if (this.movement1 == 4) {
-        this.position1x = "300px";
-        this.position1y = "500px";
+       else if (this.movement1 < 25) {
+        let x = this.movement1 * 50 - 1000;
+      
+        this.position1x = `${x}px`;
+        this.position1y = "100px";
       }
-      if (this.movement1 == 5) {
-        this.position1x = "400px";
-        this.position1y = "500px";
+
+      else if(this.movement1 >= 25){
+         this.position1x = `250px`;
+        this.position1y = "100px";        
+        
+        alert('finish')
       }
+      
+     
+      
     }
   }
-}
+};
 </script>
 
 <style>
-    #player1 {
-            background-color: green;
-            height: 100px;
-            width: 50px;
-            position:absolute
+#player1 {
+  background-color: green;
+  height: 100px;
+  width: 50px;
+  position: absolute;
+}
 
-        }
+#player2 {
+  background-color: blue;
+  height: 100px;
+  width: 50px;
+  position: absolute;
+}
 
-        #player2 {
-            background-color: blue;
-            height: 100px;
-            width: 50px;
-            position:absolute
-
-        }
-
-        .board{
+/* .board{
             background-image: url('dice-board.png')
-        }
+        } */
 </style>
