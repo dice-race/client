@@ -3,13 +3,24 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
+            <div  class="col-sm-9 col-md-7 col-lg-10 mx-auto">
+                <div  class="card card-signin my-5">
                     <div class="card-body">
-                        <h5 class="card-title text-center">DICE RACERS</h5>
+                        <img src="https://i.imgur.com/YLzc54j.png" alt=""><a href="https://fontmeme.com/arms-video-game-font/"><img src="https://fontmeme.com/permalink/180824/6f74ab54e6e759320ec00f5b79414748.png" alt="arms-video-game-font" border="0"></a><img src="https://i.imgur.com/VPMtpGQ.png" alt="">
+                        <br><b></b>
+                       <a href="https://fontmeme.com/haikyu-anime-font/"><img src="https://fontmeme.com/permalink/180824/9998ee290d19bbedf3144dcc235bff35.png" alt="haikyu-anime-font" border="0"></a>
+                        <!-- <h5 class="card-title text-center">JO UN vs THAMP LADDERS</h5> -->
+                        <br><br>
                         <form class="form-signin">
+<<<<<<< HEAD
                                 <input type="text" v-model="inputName" class="form-control" placeholder="input name" required autofocus>
                                 <br><br>
+=======
+                            <div >
+                                <input type="text" v-model="inputName" class="form-control" placeholder="username" required autofocus>
+                                <label for="username"></label>
+                            </div>
+>>>>>>> style login
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" @click.prevent="createUser">Sign in</button>
                             <hr class="my-4">
 
@@ -53,6 +64,7 @@
 </script>
 
 <style <style scoped>
+
     :root {
         --input-padding-x: 1.5rem;
         --input-padding-y: .75rem;
@@ -71,6 +83,7 @@
         border: 0;
         border-radius: 1rem;
         box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+        background-color: yellow;
     }
 
     .card-signin .card-title {
@@ -78,6 +91,7 @@
         font-weight: 300;
         font-size: 1.5rem;
     }
+
 
     .card-signin .card-body {
         padding: 2rem;
@@ -117,7 +131,6 @@
         display: block;
         width: 100%;
         margin-bottom: 0;
-        /* Override default `<label>` margin */
         line-height: 1.5;
         color: #495057;
         border: 1px solid transparent;
