@@ -1,6 +1,12 @@
 <template>
     
         <div id="example">
+          <div class="col-md-8">
+            
+            <img v-show="win2" src="../assets/throphy-donald.png" v-anime="{translateX: 250,duration: 1000 ,loop:true}">
+            <img v-show="win1" src="../assets/throphy-kim.jpg">
+
+          </div>
         <div class="row bg-dark board d-flex">
             <div id="player1" v-bind:style="{ top: topPosition1 ,left: leftPosition1 }" v-anime="{
   targets: '#player1',
@@ -10,6 +16,7 @@
   loop: true 
 }">
               <img src="../assets/kim.png" width="70px" height="70px" >
+                            <h1 v-show="win1">Im the winner</h1>
             </div>
             <div id="player2" v-bind:style="{ top: topPosition2 ,left: leftPosition2 }" v-anime="{
   targets: '#player2',
@@ -19,6 +26,7 @@
   loop: true 
 }">
               <img src="../assets/donald.png" width="70px" height="70px">
+              <h1 v-show="win2">Im the winner</h1>
             </div>
             <div id="snake" v-anime="{
   targets: '#snake .el',
@@ -33,13 +41,27 @@
             </div>
 
         </div>
+        
+<br><br>
 
-      
-        <div>
-            <button v-on:click="changePosition1">Player 1</button>
-            <button v-on:click="changePosition2">Player 2</button>
-           
+<div class="mt-5">
+  <div class="row">
+
+        <div class="col-md-2">          
+           <button v-on:click="changePosition1" class="">Player 1</button>
+          <div id="dice1" v-html="dice1" style="font-size:120px" class="text-danger"></div>
+         
         </div>
+      
+        
+          <div class="col-md-2">          
+            <button v-on:click="changePosition2" class="col-md-4">Player 2</button>
+            <div id="dice2" v-html="dice2" style="font-size:120px" class="text-success"></div>
+              
+              
+          </div>                            
+  </div>
+</div>        
     </div>
 </template>
 
@@ -52,7 +74,11 @@ export default {
       movement1: 1,
       position2x: "90px",
       position2y: "500px",
-      movement2: 1
+      movement2: 1,
+      dice1 : '',
+      dice2 : '',
+      win1 : false,
+      win2 : false
     };
   },
   computed: {
@@ -69,9 +95,12 @@ export default {
       return this.position2y;
     }
   },
-  methods: {
+  methods: { 
     changePosition1: function() {
-      let move1 = 1 + Math.floor(Math.random() * 6);
+      let move1 = 1 + Math.floor(Math.random() * 6);      
+      let output = ""      
+      output += "&#x268" + (move1-1) + "; ";
+      this.dice1 = output
       this.movement1 += move1;
 
       if (this.movement1 <= 5) {
@@ -88,21 +117,18 @@ export default {
           let x = this.movement1 * 50 + 150 - (this.movement1 - 6) * 150;
           this.position1x = `${x}px`;
           this.position1y = "400px";
-        }
-        
-
-        
+        }                
       } else if (this.movement1 <= 15) {
-        if (this.movement1 == 12) {
-          let x = this.movement1 * 50 - 500 + 50 * (this.movement1 - 11);
+        if (this.movement1 === 12) {
+          this.movement1 = 2;
+          let x = this.movement1 * 50 + 50 * (this.movement1 - 1);
           this.position1x = `${x}px`;
           this.position1y = "500px";
-          this.movement1 = 2;
+          
         } else {
           let x = this.movement1 * 50 - 500 + 50 * (this.movement1 - 11);
           this.position1x = `${x}px`;
-          this.position1y = "300px";
-          this.movement1 = 2;
+          this.position1y = "300px";          
         }
         
       } else if (this.movement1 <= 20) {
@@ -117,10 +143,14 @@ export default {
       } else if (this.movement1 >= 25) {
         this.position1x = `450px`;
         this.position1y = "100px";
+        this.win1 = true
       }
     },
     changePosition2: function() {
       let move2 = 1 + Math.floor(Math.random() * 6);
+      let output = ""      
+      output += "&#x268" + (move2-1) + "; ";
+      this.dice2 = output
       this.movement2 += move2;
 
       if (this.movement2 <= 5) {
@@ -161,6 +191,7 @@ export default {
       } else if (this.movement2 >= 25) {
         this.position2x = `450px`;
         this.position2y = "100px";
+        this.win2 = true
       }
     }
   }
