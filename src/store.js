@@ -23,8 +23,7 @@ export default new Vuex.Store({
   },
   actions: {
     createUser() {
-      console.log(this.state.username)
-      db.ref('/users').push({
+      db.ref('users/').push({
         username: this.state.username,
         movement: 0
       }, function (error) {
