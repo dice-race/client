@@ -8,10 +8,8 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">DICE RACERS</h5>
                         <form class="form-signin">
-                            <div class="form-label-group">
                                 <input type="text" v-model="inputName" class="form-control" placeholder="input name" required autofocus>
-                                <label for="username">username</label>
-                            </div>
+                                <br><br>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" @click.prevent="createUser">Sign in</button>
                             <hr class="my-4">
 

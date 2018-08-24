@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<h1>This is a testing page</h1>
+    <input type="test" v-model="inputName">
+    <button @click="createUser">add</button>
   </div>
+ 
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+import {mapActions,mapState} from 'vuex'
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+    methods: {
+    ...mapActions([
+      "createUser"
+    ])
+  },
+  computed: {
+    inputName: {
+      get() {
+        return this.$store.state.name
+      },
+      set(value) {
+        this.$store.commit('setName',value)
+      }
+    }
   }
 }
 </script>
