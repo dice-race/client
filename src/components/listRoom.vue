@@ -5,9 +5,9 @@
             <div class="card" style="width: 18rem;border:1px solid">
                   <img src="http://bluelakechamber.com/wp-content/uploads/2015/12/cube-dicejpg.jpg" class="card-img-top" alt="">
             <div class="card-body">
-                <h5 class="card-title">{{room.roomName}}</h5>
+                <h5 class="card-title">{{room.nameRoom}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Player</h6>
-                <h6 class="card-subtitle mb-2 text-muted">0/2</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{room.totalPlayer.totalPlayer || 0}}/2</h6>
                 <a href="#" class="card-link" @click="joinRoom(index)">Join Room</a>
             </div>
             </div>

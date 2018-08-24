@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
     username: '',
     nameRoom: '',
     allRoom: {}
@@ -17,15 +16,17 @@ export default new Vuex.Store({
     },
     setAllRoom(state,payload){
       state.allRoom = payload
+    },
+    setName(state,payload){
+      state.username = payload
     }
   },
   actions: {
     createUser() {
       console.log(this.state.username)
-      // console.log('gggggg');
-      
-      db.ref('users/').push({
+      db.ref('/users').push({
         username: this.state.username,
+        movement: 0
       }, function (error) {
         if (error) {
           console.log('error')
@@ -35,44 +36,43 @@ export default new Vuex.Store({
       });
     },
     createRoom(context){
-      let getDB = db.ref('/')
+      let getDB = db.ref('/room')
       let numberRoom = 0
       getDB.on('value',(snapshot)=> {
         console.log(Object.keys(snapshot.val()).length);
         numberRoom = Object.keys(snapshot.val()).length
       })
-      db.ref('room'+(numberRoom+1)).set({
+      db.ref('/room/room'+(numberRoom+1)).set({
         roomId : numberRoom+1,
         nameRoom : this.state.nameRoom,
+        totalPlayer: 0
       })
     },
     getAllRoom(context){
-      db.ref('/').on('value',(snapshot=>{
+      db.ref('/room').on('value',(snapshot=>{
         var data = snapshot.val()
         this.state.allRoom = data
       }))
     },
     joinRoom(context,id){
-      console.log(id);
-      db.ref(`room/${id}`).push({
-        name :'tes dulu'
-      },function(err){
-        if(err){
-          console.log('failed');
-        }
-      })
       var playerNumber = 0
-      db.ref(`/${id}`).on('value',snapshot=>{
-        playerNumber =  Object.keys(snapshot.val()).length - 2 
+      db.ref(`/room/${id}`).on('value',snapshot=>{
+        playerNumber =  Object.keys(snapshot.val()).length - 3 
       })
       if(playerNumber < 2){
-        db.ref(`/${id}/player` + (playerNumber+1)).set({
-          name :'tes dulu'
+        db.ref(`/room/${id}/player` + (playerNumber+1)).set({
+          name : this.state.username
         },function(err){
           if(err){
             console.log('failed');
+          }else{
+            db.ref(`room/${id}/totalPlayer`).set({
+              totalPlayer : playerNumber
+            })
           }
         })
+      }else{
+        alert('room full')
       }
     }
   }
