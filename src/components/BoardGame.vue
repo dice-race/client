@@ -1,7 +1,7 @@
 <template>
     
         <div id="example">
-        <div class="row bg-dark board">
+        <div class="row bg-dark board d-flex">
             <div id="player1" v-bind:style="{ top: topPosition1 ,left: leftPosition1 }" v-anime="{
   targets: '#player1',
   translateX: 10,
@@ -31,9 +31,6 @@
             <div id="ladder">
               <img src="../assets/ladder.png" width="150px" height="300px" >
             </div>
-            <div id="stop">
-              <img src="../assets/delete.png" width="70px" height="70px" >
-            </div>
 
         </div>
 
@@ -52,10 +49,10 @@ export default {
     return {
       position1x: "50px",
       position1y: "500px",
-      movement1: 0,
+      movement1: 1,
       position2x: "90px",
       position2y: "500px",
-      movement2: 0
+      movement2: 1
     };
   },
   computed: {
@@ -82,18 +79,32 @@ export default {
         this.position1x = `${x}px`;
         this.position1y = "500px";
       } else if (this.movement1 <= 10) {
-        let x = this.movement1 * 50 + 150 - (this.movement1 - 6) * 150;
-        this.position1x = `${x}px`;
-        this.position1y = "400px";
-
         if (this.movement1 === 8) {
           this.movement1 = 23;
+          let x = this.movement1 * 50 - (1000 - 50 * (this.movement1 - 21));
+          this.position1x = `${x}px`;
+          this.position1y = "100px";
+        } else {
+          let x = this.movement1 * 50 + 150 - (this.movement1 - 6) * 150;
+          this.position1x = `${x}px`;
+          this.position1y = "400px";
         }
+        
+
+        
       } else if (this.movement1 <= 15) {
-        let x = this.movement1 * 50 - 500 + 50 * (this.movement1 - 11);
-        this.position1x = `${x}px`;
-        this.position1y = "300px";
-        this.movement1 = 2;
+        if (this.movement1 == 12) {
+          let x = this.movement1 * 50 - 500 + 50 * (this.movement1 - 11);
+          this.position1x = `${x}px`;
+          this.position1y = "500px";
+          this.movement1 = 2;
+        } else {
+          let x = this.movement1 * 50 - 500 + 50 * (this.movement1 - 11);
+          this.position1x = `${x}px`;
+          this.position1y = "300px";
+          this.movement1 = 2;
+        }
+        
       } else if (this.movement1 <= 20) {
         let x = this.movement1 * 50 - (350 + (this.movement1 - 16) * 150);
         this.position1x = `${x}px`;
@@ -109,28 +120,34 @@ export default {
       }
     },
     changePosition2: function() {
-      let move1 = 1 + Math.floor(Math.random() * 6);
-      this.movement2 += move1;
+      let move2 = 1 + Math.floor(Math.random() * 6);
+      this.movement2 += move2;
 
       if (this.movement2 <= 5) {
         let x = this.movement2 * 50 + 50 * (this.movement2 - 1) + 40;
         this.position2x = `${x}px`;
         this.position2y = "500px";
       } else if (this.movement2 <= 10) {
-        let x = this.movement2 * 50 + 150 - (this.movement2 - 6) * 150;
-        this.position2x = `${x}px`;
-        this.position2y = "400px";
-
         if (this.movement2 === 8) {
           this.movement2 = 23;
+          let x = this.movement2 * 50 - (1000 - 50 * (this.movement2 - 21));
+          this.position2x = `${x}px`;
+          this.position2y = "100px";
+        } else {
+          let x = this.movement2 * 50 + 150 - (this.movement2 - 6) * 150;
+          this.position2x = `${x}px`;
+          this.position2y = "400px";
         }
       } else if (this.movement2 <= 15) {
-        let x = this.movement2 * 50 - 500 + 50 * (this.movement2 - 11);
-        this.position2x = `${x}px`;
-        this.position2y = "300px";
-
         if (this.movement2 === 12) {
           this.movement2 = 2;
+          let x = this.movement2 * 50 + 50 * (this.movement2 - 1) + 40;
+          this.position2x = `${x}px`;
+          this.position2y = "500px";
+        } else {
+          let x = this.movement2 * 50 - 500 + 50 * (this.movement2 - 11);
+          this.position2x = `${x}px`;
+          this.position2y = "300px";
         }
       } else if (this.movement2 <= 20) {
         let x = this.movement2 * 50 - (350 + (this.movement2 - 16) * 150);
