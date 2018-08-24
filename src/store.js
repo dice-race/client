@@ -6,14 +6,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+
     username: '',
     nameRoom: '',
     allRoom: {}
   },
   mutations: {
-    setName(state,payload){
-      state.name = payload
-    },
     setRoom(state,payload){
       state.nameRoom = payload
     },
@@ -37,23 +35,21 @@ export default new Vuex.Store({
       });
     },
     createRoom(context){
-      // console.log(this.state.name);
-      db.ref('room').push({
-        roomName : this.state.nameRoom
+      let getDB = db.ref('/')
+      let numberRoom = 0
+      getDB.on('value',(snapshot)=> {
+        console.log(Object.keys(snapshot.val()).length);
+        numberRoom = Object.keys(snapshot.val()).length
       })
-      .then(room=>{
-        console.log(room.path);
+      db.ref('room'+(numberRoom+1)).set({
+        roomId : numberRoom+1,
+        nameRoom : this.state.nameRoom,
       })
-      .catch(err=>{
-        console.log(err);
-      })
-      
     },
     getAllRoom(context){
-      db.ref('room').on('value',(snapshot=>{
+      db.ref('/').on('value',(snapshot=>{
         var data = snapshot.val()
         this.state.allRoom = data
-        // context.commit('setAllRoom',data)
       }))
     },
     joinRoom(context,id){
@@ -65,6 +61,19 @@ export default new Vuex.Store({
           console.log('failed');
         }
       })
+      var playerNumber = 0
+      db.ref(`/${id}`).on('value',snapshot=>{
+        playerNumber =  Object.keys(snapshot.val()).length - 2 
+      })
+      if(playerNumber < 2){
+        db.ref(`/${id}/player` + (playerNumber+1)).set({
+          name :'tes dulu'
+        },function(err){
+          if(err){
+            console.log('failed');
+          }
+        })
+      }
     }
   }
 })
