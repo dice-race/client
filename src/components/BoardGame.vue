@@ -9,7 +9,7 @@
   easing: 'easeInOutQuart',
   loop: true 
 }">
-              <img src="../assets/donald(1).png" width="70px" height="70px" >
+              <img src="../assets/kim.png" width="70px" height="70px" >
             </div>
             <div id="player2" v-bind:style="{ top: topPosition2 ,left: leftPosition2 }" v-anime="{
   targets: '#player2',
